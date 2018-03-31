@@ -8,4 +8,8 @@ public class ApiDTOBuilder {
 				user.getEmail(), user.getName(), user.getLastName(), 
 				user.getTel(), user.getBornDate());
 	}
+	public static User userDTOToUser(UserDTO user) {
+		return new User(user.getUsername(), user.getPassword(), user.getUserType(),
+				user.getEmail(), user.getName(), user.getLastName(), user.getTel(), user.getBornDate());
+	}
 }

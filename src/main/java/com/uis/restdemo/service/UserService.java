@@ -20,4 +20,20 @@ public class UserService implements IUserService {
 		return ApiDTOBuilder.userToUserDTO(user);
 	}
 
+	@Override
+	public void createUser(UserDTO user) {
+		userDAO.createUser(ApiDTOBuilder.userDTOToUser(user));	
+	}
+
+	@Override
+	public void updateUser(UserDTO user) {
+		userDAO.updateUser(ApiDTOBuilder.userDTOToUser(user));
+		
+	}
+
+	@Override
+	public void deleteUser(String username) {
+		userDAO.deleteUser(username);
+	}
+
 }
