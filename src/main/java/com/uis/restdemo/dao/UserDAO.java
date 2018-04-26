@@ -1,5 +1,7 @@
 package com.uis.restdemo.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -18,6 +20,14 @@ public class UserDAO implements IUserDAO {
 	@Transactional
 	public User getUser(String username) {
 		return em.find(User.class, username);
+	}
+
+
+	@Override
+	@Transactional
+	public List<User> getUsers() {
+		List<User> resultList = em.createQuery("FROM User", User.class).getResultList();
+		return resultList;
 	}
 
 	@Override

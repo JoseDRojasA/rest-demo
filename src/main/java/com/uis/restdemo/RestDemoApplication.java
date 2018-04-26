@@ -14,6 +14,7 @@ public class RestDemoApplication extends SpringBootServletInitializer {
     }
  
 	public static void main(String[] args) {
+        System.out.println("HI");
 		SpringApplication.run(RestDemoApplication.class, args);
 	}
 }

@@ -3,6 +3,10 @@ package com.uis.restdemo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import com.uis.restdemo.dao.IUserDAO;
 import com.uis.restdemo.dto.ApiDTOBuilder;
 import com.uis.restdemo.dto.UserDTO;
@@ -14,6 +18,20 @@ public class UserService implements IUserService {
 	@Autowired
 	private IUserDAO userDAO;
 	
+	@Override
+	public List<UserDTO> getAllUsers() {
+		List<User> usersPersistence = userDAO.getUsers();
+		List<UserDTO> users = new ArrayList<UserDTO>();
+
+		Iterator<User> iterator = usersPersistence.iterator();
+
+		while(iterator.hasNext()) {
+			User user = iterator.next();
+			users.add(ApiDTOBuilder.userToUserDTO(user));
+		}
+		return users;
+	}
+
 	@Override
 	public UserDTO getUserByUsername(String username) {
 		User user = userDAO.getUser(username);	

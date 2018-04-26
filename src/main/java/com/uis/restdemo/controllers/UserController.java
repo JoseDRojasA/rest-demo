@@ -15,19 +15,28 @@ import com.uis.restdemo.exceptions.InternalServerError;
 import com.uis.restdemo.exceptions.WrongParameters;
 import com.uis.restdemo.service.UserService;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/1.0/users")
 @CrossOrigin
 public class UserController {
 
 	@Autowired
 	UserService service;
+
+	@RequestMapping(value="", method=RequestMethod.GET, produces="application/json" )
+	public ResponseEntity<List<UserDTO>> readAll() {
+		List<UserDTO> user = service.getAllUsers();
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
 	
 	@RequestMapping(value="{username}", method=RequestMethod.GET, produces="application/json" )
 	public ResponseEntity<UserDTO> read(@PathVariable String username) {
 		UserDTO user = service.getUserByUsername(username);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
+
 	@RequestMapping(value="", method=RequestMethod.POST, produces="application/json" )
 	public ResponseEntity<UserDTO> create(@RequestBody UserDTO user) {
 		try {
