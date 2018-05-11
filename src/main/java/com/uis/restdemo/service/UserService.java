@@ -20,10 +20,10 @@ public class UserService implements IUserService {
 	
 	@Override
 	public List<UserDTO> getAllUsers() {
-		List<User> usersPersistence = userDAO.getUsers();
+		List<User> entities = userDAO.getUsers();
 		List<UserDTO> users = new ArrayList<UserDTO>();
 
-		Iterator<User> iterator = usersPersistence.iterator();
+		Iterator<User> iterator = entities.iterator();
 
 		while(iterator.hasNext()) {
 			User user = iterator.next();
